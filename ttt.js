@@ -19,7 +19,7 @@ function gameBoard() {
     { name: "player1", value: 1 },
     { name: "player2", value: 2 },
   ];
-  let activePlayer = players[0];
+  let activePlayer = players[1];
   for (let i = 0; i < rows; i++) {
     board[i] = [];
 
@@ -47,7 +47,7 @@ function gameBoard() {
     board[row][col] = p.value;
   }
 
-  return { displayBoard, makePlayerMove, updateTurn };
+  return { displayBoard, makePlayerMove, updateTurn, board };
 }
 
 //game controller
@@ -56,14 +56,26 @@ function gameController() {
   const game = gameBoard(); //creating a new game board //when you create an instance using const game = gameBoard();, you gain access to all the properties and methods that the gameBoard function explicitly returns in its return statement.
 
   function playRound(col, row) {
-    game.displayBoard();
     game.makePlayerMove(col, row);
+    game.displayBoard();
+    checkWinner();
   }
 
-  return { playRound };
+  function checkWinner() {
+    const isWinner = game.board.some((row) => row.every((col) => col === "1"));
+    if (isWinner === true) {
+      console.log("Winner");
+    } else {
+      console.log("asd");
+    }
+  }
+
+  return { playRound, checkWinner };
 }
 
 const g1 = gameController();
+console.log(g1.playRound(1, 0));
+console.log(g1.playRound(1, 2));
 console.log(g1.playRound(1, 1));
-console.log(g1.playRound(0, 1));
+console.log(g1.playRound(0, 2));
 console.log(g1.playRound(1, 2));
