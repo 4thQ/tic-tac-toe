@@ -125,15 +125,45 @@ function gameController() {
         console.log("Col Winner2!");
       }
     }
+    //diagonal winner for 2
+
+    if (
+      (gameArray[0][0] == 2 && gameArray[1][1] == 2 && gameArray[2][2]) == 2 ||
+      (gameArray[0][2] == 2 && gameArray[1][1] == 2 && gameArray[2][0] == 2)
+    ) {
+      console.log("Diagonal Winner!");
+    }
+
+    if (
+      (gameArray[0][0] == 1 && gameArray[1][1] == 1 && gameArray[2][2]) == 1 ||
+      (gameArray[0][2] == 1 && gameArray[1][1] == 1 && gameArray[2][0] == 1)
+    ) {
+      console.log("Diagonal Winner!");
+    }
+
+    if (
+      gameArray.includes(1) &&
+      gameArray.includes(2) &&
+      !gameArray.includes(0)
+    ) {
+      console.log("Tie!");
+    }
   }
 
   return { playRound, checkWinner };
 }
 
 const g1 = gameController();
-console.log(g1.playRound(1, 0));
 console.log(g1.playRound(0, 0));
-console.log(g1.playRound(1, 1));
+console.log(g1.playRound(0, 2));
+
+console.log(g1.playRound(0, 1));
 console.log(g1.playRound(1, 0));
+
+console.log(g1.playRound(1, 1));
+console.log(g1.playRound(2, 1));
+
 console.log(g1.playRound(1, 2));
+console.log(g1.playRound(2, 2));
+
 console.log(g1.playRound(2, 0));
