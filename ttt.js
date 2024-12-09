@@ -79,3 +79,4 @@ console.log(g1.playRound(1, 2));
 console.log(g1.playRound(1, 1));
 console.log(g1.playRound(0, 2));
 console.log(g1.playRound(1, 2));
+console.log(g1.checkWinner());
