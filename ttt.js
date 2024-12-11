@@ -51,10 +51,10 @@ function gameBoard() {
 
   function makePlayerMove(row, col) {
     //1.1 players move logic
-    console.log(`${getActivePlayer().value}'s Move!`);
 
     board[row][col] = activePlayer.value;
     updateTurn();
+    console.log(`${getActivePlayer().value}'s Move next!`);
   }
 
   return { displayBoard, makePlayerMove, updateTurn, board, getActivePlayer };
@@ -72,18 +72,28 @@ function gameController() {
   }
 
   function checkWinner() {
+    const gb = game.board;
+    const flatGb = gb.flat();
+    console.log(flatGb);
+
+    arrayTie = flatGb.every((element) => element == "o" || element == "x");
+
+    if (arrayTie == true) {
+      return console.log("Its a tie!");
+    }
+
     //row
     let gameArray = game.board;
 
     for (const row of gameArray) {
-      let check = row.every((i) => i == 1);
+      let check = row.every((i) => i == "x");
       if (check == true) {
         return console.log("Row winner1");
       }
     }
 
     for (const row of gameArray) {
-      let check2 = row.every((i) => i == 2);
+      let check2 = row.every((i) => i == "o");
       if (check2 == true) {
         return console.log("Row winner2");
       }
@@ -93,7 +103,7 @@ function gameController() {
     for (let i = 0; i < 3; i++) {
       const column = gameArray.map((row) => row[i]); //
 
-      columnWinner = column.every((c) => c == 1);
+      columnWinner = column.every((c) => c == "x");
 
       if (columnWinner == true) {
         return console.log("Col Winner!");
@@ -103,7 +113,7 @@ function gameController() {
     for (let i = 0; i < 3; i++) {
       const column = gameArray.map((row) => row[i]); //
 
-      columnWinner2 = column.every((c) => c == 2);
+      columnWinner2 = column.every((c) => c == "o");
 
       if (columnWinner2 == true) {
         return console.log("Col Winner2!");
@@ -112,23 +122,23 @@ function gameController() {
     //diagonal winner for 2
 
     if (
-      (gameArray[0][0] == 2 && gameArray[1][1] == 2 && gameArray[2][2]) == 2 ||
-      (gameArray[0][2] == 2 && gameArray[1][1] == 2 && gameArray[2][0] == 2)
+      (gameArray[0][0] == "o" && gameArray[1][1] == "o" && gameArray[2][2]) ==
+        "o" ||
+      (gameArray[0][2] == "o" &&
+        gameArray[1][1] == "o" &&
+        gameArray[2][0] == "o")
     ) {
       return console.log("Diagonal Winner!");
     }
 
     if (
-      (gameArray[0][0] == 1 && gameArray[1][1] == 1 && gameArray[2][2]) == 1 ||
-      (gameArray[0][2] == 1 && gameArray[1][1] == 1 && gameArray[2][0] == 1)
+      (gameArray[0][0] == "x" && gameArray[1][1] == "x" && gameArray[2][2]) ==
+        "x" ||
+      (gameArray[0][2] == "x" &&
+        gameArray[1][1] == "x" &&
+        gameArray[2][0] == "x")
     ) {
       return console.log("Diagonal Winner!");
-    }
-
-    const flat = gameArray.flat();
-
-    if (flat.includes(0) == false) {
-      return console.log("Its a tie!");
     }
   }
 
@@ -140,6 +150,13 @@ console.table(g.board);
 const g1 = gameController();
 g1.playRound(1, 0);
 g1.playRound(1, 1);
+g1.playRound(2, 0);
+g1.playRound(1, 2);
+g1.playRound(0, 0);
+g1.playRound(0, 1);
+g1.playRound(0, 2);
+g1.playRound(2, 1);
+g1.playRound(2, 2);
 
 function handleDisplay() {
   const game = gameBoard(); //
