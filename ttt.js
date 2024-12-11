@@ -66,8 +66,6 @@ function gameBoard() {
     players,
   };
 }
-const gg = gameBoard();
-console.log(gg.players[0].name);
 
 //game controller
 
@@ -203,6 +201,9 @@ function handleDisplay() {
     e.target.disabled = true;
   }
 
+  function clickReset() {}
+
+  resetbtn.addEventListener("click", clickReset);
   boardDiv.addEventListener("click", clickHandlerBoard);
 
   clickHandlerBoard();
