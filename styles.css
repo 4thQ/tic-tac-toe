@@ -1,0 +1,16 @@
+.container {
+  background-color: aqua;
+  border: 2px solid black;
+}
+
+.turn {
+  background-color: yellow;
+}
+
+.board {
+  background-color: slateblue;
+}
+
+.cell {
+  width: 100px;
+}

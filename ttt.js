@@ -1,3 +1,17 @@
+function cellObj() {
+  let value = 0;
+
+  function addToken(player) {
+    return (value = player);
+  }
+
+  function getValue() {
+    return value;
+  }
+
+  return { addToken, getValue };
+}
+
 //Game board
 function gameBoard() {
   const rows = 3;
@@ -5,21 +19,22 @@ function gameBoard() {
   const board = [];
 
   const players = [
-    { name: "player1", value: 1 },
-    { name: "player2", value: 2 },
+    { name: "player1", value: "x" },
+    { name: "player2", value: "o" },
   ];
-  let activePlayer = players[1];
+  let activePlayer = players[0];
   for (let i = 0; i < rows; i++) {
     board[i] = [];
 
     for (let j = 0; j < col; j++) {
-      board[i].push(0);
+      board[i].push(cellObj());
     }
   }
 
   function displayBoard() {
     //1. creating game board
     console.table(board);
+    // return board;
   }
 
   function updateTurn() {
@@ -30,13 +45,19 @@ function gameBoard() {
     }
   }
 
-  function makePlayerMove(row, col) {
-    //1.1 players move logic
-    let p = updateTurn();
-    board[row][col] = p.value;
+  function getActivePlayer() {
+    return activePlayer;
   }
 
-  return { displayBoard, makePlayerMove, updateTurn, board };
+  function makePlayerMove(row, col) {
+    //1.1 players move logic
+    console.log(`${getActivePlayer().value}'s Move!`);
+
+    board[row][col] = activePlayer.value;
+    updateTurn();
+  }
+
+  return { displayBoard, makePlayerMove, updateTurn, board, getActivePlayer };
 }
 
 //game controller
@@ -114,27 +135,17 @@ function gameController() {
   return { playRound, checkWinner };
 }
 
+const g = gameBoard();
+console.table(g.board);
 const g1 = gameController();
+g1.playRound(1, 0);
+g1.playRound(1, 1);
 
-console.log(g1.playRound(0, 0));
-console.log(g1.playRound(0, 2));
+function handleDisplay() {
+  const game = gameBoard(); //
+  const gameC = gameController();
+  const playerTurnDiv = document.querySelector(".turn");
+  const boardDiv = document.querySelector(".board");
 
-console.log(g1.playRound(0, 1));
-console.log(g1.playRound(1, 0));
-
-console.log(g1.playRound(1, 1));
-console.log(g1.playRound(2, 1));
-
-console.log(g1.playRound(1, 2));
-console.log(g1.playRound(2, 2));
-
-console.log(g1.playRound(2, 0));
-
-// console.log(g1.playRound(2, 0));
-// console.log(g1.playRound(2, 1));
-
-// console.log(g1.playRound(1, 1));
-// console.log(g1.playRound(0, 2));
-
-// console.log(g1.playRound(0, 2));
-// console.log(g1.playRound(2, 1));
+  const updateScreen = () => {};
+}
