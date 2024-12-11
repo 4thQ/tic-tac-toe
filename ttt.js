@@ -153,6 +153,7 @@ function gameController() {
 }
 
 function handleDisplay() {
+  const cellO = cellObj();
   const game = gameBoard(); //
   const gameC = gameController();
   const playerTurnDiv = document.querySelector(".turn");
@@ -172,6 +173,8 @@ function handleDisplay() {
       boardDiv.appendChild(cellBtn);
     });
   });
+
+  function updateScreen() {}
 
   function clickHandlerBoard(e) {
     console.log(e);
@@ -201,7 +204,9 @@ function handleDisplay() {
     e.target.disabled = true;
   }
 
-  function clickReset() {}
+  function clickReset() {
+    document.location.reload();
+  }
 
   resetbtn.addEventListener("click", clickReset);
   boardDiv.addEventListener("click", clickHandlerBoard);
