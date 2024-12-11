@@ -57,14 +57,24 @@ function gameBoard() {
     console.log(`${getActivePlayer().value}'s Move next!`);
   }
 
-  return { displayBoard, makePlayerMove, updateTurn, board, getActivePlayer };
+  return {
+    displayBoard,
+    makePlayerMove,
+    updateTurn,
+    board,
+    getActivePlayer,
+    players,
+  };
 }
+const gg = gameBoard();
+console.log(gg.players[0].name);
 
 //game controller
 
 function gameController() {
   const game = gameBoard(); //creating a new game board //when you create an instance using const game = gameBoard();, you gain access to all the properties and methods that the gameBoard function explicitly returns in its return statement.
-
+  const player1 = game.players[0].name;
+  const player2 = game.players[1].name;
   function playRound(col, row) {
     game.makePlayerMove(col, row);
     game.displayBoard();
@@ -74,12 +84,11 @@ function gameController() {
   function checkWinner() {
     const gb = game.board;
     const flatGb = gb.flat();
-    console.log(flatGb);
 
     arrayTie = flatGb.every((element) => element == "o" || element == "x");
 
     if (arrayTie == true) {
-      return console.log("Its a tie!");
+      return "Game tied!";
     }
 
     //row
@@ -88,14 +97,14 @@ function gameController() {
     for (const row of gameArray) {
       let check = row.every((i) => i == "x");
       if (check == true) {
-        return console.log("Row winner1");
+        return "Player 1 wins";
       }
     }
 
     for (const row of gameArray) {
       let check2 = row.every((i) => i == "o");
       if (check2 == true) {
-        return console.log("Row winner2");
+        return "Player 2 wins";
       }
     }
 
@@ -106,7 +115,7 @@ function gameController() {
       columnWinner = column.every((c) => c == "x");
 
       if (columnWinner == true) {
-        return console.log("Col Winner!");
+        return "Player 1 wins";
       }
     }
 
@@ -116,7 +125,7 @@ function gameController() {
       columnWinner2 = column.every((c) => c == "o");
 
       if (columnWinner2 == true) {
-        return console.log("Col Winner2!");
+        return "Player 2 wins";
       }
     }
     //diagonal winner for 2
@@ -128,7 +137,7 @@ function gameController() {
         gameArray[1][1] == "o" &&
         gameArray[2][0] == "o")
     ) {
-      return console.log("Diagonal Winner!");
+      return "Player 2 wins";
     }
 
     if (
@@ -138,51 +147,38 @@ function gameController() {
         gameArray[1][1] == "x" &&
         gameArray[2][0] == "x")
     ) {
-      return console.log("Diagonal Winner!");
+      return "Player 1 wins";
     }
   }
 
   return { playRound, checkWinner };
 }
 
-const g1 = gameController();
-g1.playRound(1, 0);
-g1.playRound(1, 1);
-g1.playRound(2, 0);
-g1.playRound(1, 2);
-g1.playRound(0, 0);
-g1.playRound(0, 1);
-g1.playRound(0, 2);
-g1.playRound(2, 1);
-g1.playRound(2, 2);
-
 function handleDisplay() {
   const game = gameBoard(); //
   const gameC = gameController();
   const playerTurnDiv = document.querySelector(".turn");
   const boardDiv = document.querySelector(".board");
+  const resetbtn = document.querySelector(".resetBtn");
+  let gb = game.board;
+  playerTurnDiv.innerText = "Make you Move";
 
-  function whoseTurn() {
-    playerTurnDiv.innerText =
-      "Player: (" + game.getActivePlayer().value + ") Make your move!";
-  }
-
-  function updateScreen() {
-    let gb = game.board;
-    console.log(gb);
-    gb.forEach((row, rowIndex) => {
-      row.forEach((col, colIndex) => {
-        const cellBtn = document.createElement("button");
-        cellBtn.classList.add("cellBtn");
-        cellBtn.innerText = game.getActivePlayer().value;
-        cellBtn.dataset.column = colIndex;
-        cellBtn.dataset.row = rowIndex;
-        boardDiv.appendChild(cellBtn);
-      });
+  //creates the board
+  gb.forEach((row, colIndex) => {
+    row.forEach((col, rowIndex) => {
+      const cellBtn = document.createElement("button");
+      cellBtn.classList.add("cellBtn");
+      cellBtn.innerText = "";
+      cellBtn.dataset.column = colIndex;
+      cellBtn.dataset.row = rowIndex;
+      boardDiv.appendChild(cellBtn);
     });
-  }
+  });
 
   function clickHandlerBoard(e) {
+    console.log(e);
+    playerTurnDiv.innerText = "Make your Move";
+
     const selectedColumn = e.target.dataset.column;
     const selectedRow = e.target.dataset.row;
 
@@ -190,11 +186,26 @@ function handleDisplay() {
     console.log(selectedRow);
 
     gameC.playRound(selectedColumn, selectedRow);
-    updateScreen();
+    e.target.innerText = game.getActivePlayer().value;
+
+    game.updateTurn();
+
+    playerTurnDiv.innerText =
+      "Player: (" + game.getActivePlayer().value + ") Make your move!";
+    playerTurnDiv.innerText = gameC.checkWinner() + "Wins";
+    if (playerTurnDiv.innerText === "undefinedWins") {
+      playerTurnDiv.innerText =
+        "Player: (" + game.getActivePlayer().value + ") Make your move!";
+    } else {
+      playerTurnDiv.innerText = gameC.checkWinner();
+      boardDiv.removeEventListener("click", clickHandlerBoard);
+    }
+    e.target.disabled = true;
   }
+
   boardDiv.addEventListener("click", clickHandlerBoard);
 
-  updateScreen(), whoseTurn(), clickHandlerBoard();
+  clickHandlerBoard();
 }
 
 handleDisplay();
