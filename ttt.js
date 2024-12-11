@@ -145,8 +145,6 @@ function gameController() {
   return { playRound, checkWinner };
 }
 
-const g = gameBoard();
-console.table(g.board);
 const g1 = gameController();
 g1.playRound(1, 0);
 g1.playRound(1, 1);
@@ -164,5 +162,56 @@ function handleDisplay() {
   const playerTurnDiv = document.querySelector(".turn");
   const boardDiv = document.querySelector(".board");
 
-  const updateScreen = () => {};
+  function whoseTurn() {
+    playerTurnDiv.innerText =
+      "Player: (" + game.getActivePlayer().value + ") Make your move!";
+  }
+
+  function updateScreen() {
+    let gb = game.board;
+    console.log(gb);
+    gb.forEach((row, rowIndex) => {
+      row.forEach((col, colIndex) => {
+        const cellBtn = document.createElement("button");
+        cellBtn.classList.add("cellBtn");
+        cellBtn.innerText = game.getActivePlayer().value;
+        cellBtn.dataset.column = colIndex;
+        cellBtn.dataset.row = rowIndex;
+        boardDiv.appendChild(cellBtn);
+      });
+    });
+  }
+
+  function clickHandlerBoard(e) {
+    const selectedColumn = e.target.dataset.column;
+    const selectedRow = e.target.dataset.row;
+
+    console.log(selectedColumn);
+    console.log(selectedRow);
+
+    gameC.playRound(selectedColumn, selectedRow);
+    updateScreen();
+  }
+  boardDiv.addEventListener("click", clickHandlerBoard);
+
+  updateScreen(), whoseTurn(), clickHandlerBoard();
 }
+
+handleDisplay();
+//  let gb = game.board;
+//     console.log(gb);
+//     gb.forEach((row, rowIndex) => {
+//       row.forEach((col, colIndex) => {
+//         const cellBtn = document.createElement("button");
+//         cellBtn.classList.add("cellBtn");
+
+//         // Optionally, you can set attributes or text content for the button if necessary
+//         // For example, to set a data attribute:
+//         cellBtn.setAttribute("data-row", rowIndex);
+//         cellBtn.setAttribute("data-col", colIndex);
+
+//         // Append the button to boardDiv
+//         boardDiv.appendChild(cellBtn);
+//       });
+//     });
+//   }

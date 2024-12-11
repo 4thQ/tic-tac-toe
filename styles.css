@@ -9,8 +9,10 @@
 
 .board {
   background-color: slateblue;
+  width: 300px;
 }
 
-.cell {
+.cellBtn {
   width: 100px;
+  height: 100px;
 }
