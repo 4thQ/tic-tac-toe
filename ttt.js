@@ -104,12 +104,6 @@ function gameController() {
     const gb = game.board;
     const flatGb = gb.flat();
 
-    arrayTie = flatGb.every((element) => element == "O" || element == "X");
-
-    if (arrayTie == true) {
-      return "Game tied!";
-    }
-
     //row
     let gameArray = game.board;
 
@@ -167,6 +161,12 @@ function gameController() {
         gameArray[2][0] == "X")
     ) {
       return "Player X wins!";
+    }
+
+    arrayTie = flatGb.every((element) => element == "O" || element == "X");
+
+    if (arrayTie == true) {
+      return "Game tied!";
     }
   }
 
@@ -254,20 +254,3 @@ function handleDisplay() {
 }
 
 handleDisplay();
-//  let gb = game.board;
-//     console.log(gb);
-//     gb.forEach((row, rowIndex) => {
-//       row.forEach((col, colIndex) => {
-//         const cellBtn = document.createElement("button");
-//         cellBtn.classList.add("cellBtn");
-
-//         // Optionally, you can set attributes or text content for the button if necessary
-//         // For example, to set a data attribute:
-//         cellBtn.setAttribute("data-row", rowIndex);
-//         cellBtn.setAttribute("data-col", colIndex);
-
-//         // Append the button to boardDiv
-//         boardDiv.appendChild(cellBtn);
-//       });
-//     });
-//   }
