@@ -1,3 +1,26 @@
+let darkmode = localStorage.getItem("darkmode");
+const themeSwitch = document.querySelector(".theme-switch");
+
+function enableDarkmode() {
+  document.body.classList.add("darkmode");
+  localStorage.setItem("darkmode", "active");
+}
+
+function disableDarkmode() {
+  document.body.classList.remove("darkmode");
+  localStorage.setItem("darkmode", null);
+}
+
+if (darkmode === "active") {
+  enableDarkmode();
+}
+
+themeSwitch.addEventListener("click", () => {
+  darkmode = localStorage.getItem("darkmode");
+
+  darkmode !== "active" ? enableDarkmode() : disableDarkmode();
+});
+
 function cellObj() {
   let value = 0;
 
@@ -19,8 +42,8 @@ function gameBoard() {
   const board = [];
 
   const players = [
-    { name: "player1", value: "x" },
-    { name: "player2", value: "o" },
+    { name: "player1", value: "X" },
+    { name: "player2", value: "O" },
   ];
   let activePlayer = players[0];
   for (let i = 0; i < rows; i++) {
@@ -33,7 +56,6 @@ function gameBoard() {
 
   function displayBoard() {
     //1. creating game board
-    console.table(board);
     // return board;
   }
 
@@ -54,7 +76,6 @@ function gameBoard() {
 
     board[row][col] = activePlayer.value;
     updateTurn();
-    console.log(`${getActivePlayer().value}'s Move next!`);
   }
 
   return {
@@ -83,7 +104,7 @@ function gameController() {
     const gb = game.board;
     const flatGb = gb.flat();
 
-    arrayTie = flatGb.every((element) => element == "o" || element == "x");
+    arrayTie = flatGb.every((element) => element == "O" || element == "X");
 
     if (arrayTie == true) {
       return "Game tied!";
@@ -93,16 +114,16 @@ function gameController() {
     let gameArray = game.board;
 
     for (const row of gameArray) {
-      let check = row.every((i) => i == "x");
+      let check = row.every((i) => i == "X");
       if (check == true) {
-        return "Player 1 wins";
+        return "X wins!";
       }
     }
 
     for (const row of gameArray) {
-      let check2 = row.every((i) => i == "o");
+      let check2 = row.every((i) => i == "O");
       if (check2 == true) {
-        return "Player 2 wins";
+        return "O wins!";
       }
     }
 
@@ -110,42 +131,42 @@ function gameController() {
     for (let i = 0; i < 3; i++) {
       const column = gameArray.map((row) => row[i]); //
 
-      columnWinner = column.every((c) => c == "x");
+      columnWinner = column.every((c) => c == "X");
 
       if (columnWinner == true) {
-        return "Player 1 wins";
+        return "X wins!";
       }
     }
 
     for (let i = 0; i < 3; i++) {
       const column = gameArray.map((row) => row[i]); //
 
-      columnWinner2 = column.every((c) => c == "o");
+      columnWinner2 = column.every((c) => c == "O");
 
       if (columnWinner2 == true) {
-        return "Player 2 wins";
+        return "O wins!";
       }
     }
     //diagonal winner for 2
 
     if (
-      (gameArray[0][0] == "o" && gameArray[1][1] == "o" && gameArray[2][2]) ==
-        "o" ||
-      (gameArray[0][2] == "o" &&
-        gameArray[1][1] == "o" &&
-        gameArray[2][0] == "o")
+      (gameArray[0][0] == "O" && gameArray[1][1] == "O" && gameArray[2][2]) ==
+        "O" ||
+      (gameArray[0][2] == "O" &&
+        gameArray[1][1] == "O" &&
+        gameArray[2][0] == "O")
     ) {
-      return "Player 2 wins";
+      return "O wins!";
     }
 
     if (
-      (gameArray[0][0] == "x" && gameArray[1][1] == "x" && gameArray[2][2]) ==
-        "x" ||
-      (gameArray[0][2] == "x" &&
-        gameArray[1][1] == "x" &&
-        gameArray[2][0] == "x")
+      (gameArray[0][0] == "X" && gameArray[1][1] == "X" && gameArray[2][2]) ==
+        "X" ||
+      (gameArray[0][2] == "X" &&
+        gameArray[1][1] == "X" &&
+        gameArray[2][0] == "X")
     ) {
-      return "Player 1 wins";
+      return "X wins!";
     }
   }
 
@@ -177,14 +198,10 @@ function handleDisplay() {
   function updateScreen() {}
 
   function clickHandlerBoard(e) {
-    console.log(e);
     playerTurnDiv.innerText = "Make your Move";
 
     const selectedColumn = e.target.dataset.column;
     const selectedRow = e.target.dataset.row;
-
-    console.log(selectedColumn);
-    console.log(selectedRow);
 
     gameC.playRound(selectedColumn, selectedRow);
     e.target.innerText = game.getActivePlayer().value;
@@ -192,11 +209,11 @@ function handleDisplay() {
     game.updateTurn();
 
     playerTurnDiv.innerText =
-      "Player: (" + game.getActivePlayer().value + ") Make your move!";
+      "Playerz (" + game.getActivePlayer().value + ") Make your move!";
     playerTurnDiv.innerText = gameC.checkWinner() + "Wins";
     if (playerTurnDiv.innerText === "undefinedWins") {
       playerTurnDiv.innerText =
-        "Player: (" + game.getActivePlayer().value + ") Make your move!";
+        "Player " + game.getActivePlayer().value + "'s Turn";
     } else {
       playerTurnDiv.innerText = gameC.checkWinner();
       boardDiv.removeEventListener("click", clickHandlerBoard);

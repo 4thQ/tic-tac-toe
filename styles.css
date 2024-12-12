@@ -1,18 +1,77 @@
+:root {
+  --base-color: rgb(230, 230, 230);
+  --text-color: black;
+  --cell-color: white;
+  --cell-border-color: black;
+  --border-color: black;
+  --font-color: black;
+}
+.darkmode {
+  --base-color: rgb(0, 0, 0);
+  --text-color: rgb(255, 255, 255);
+  --cell-color: rgb(0, 0, 0);
+  --cell-border-color: rgb(255, 255, 255);
+  --border-color: rgb(255, 255, 255);
+  --font-color: rgb(255, 255, 255);
+}
+
+.theme-switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.theme-switch svg:last-child {
+  display: none;
+}
+
+.darkmode .theme-switch svg:first-child {
+  display: none;
+}
+
+.darkmode .theme-switch svg:last-child {
+  display: block;
+}
+
+body {
+  height: 500px;
+  background: var(--base-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-container {
+  width: 200px;
+  height: 100px;
+
+  justify-items: center;
+}
+
+.title-container {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.7em;
+}
+.title {
+  margin-bottom: 17px;
+  color: var(--font-color);
+}
+
 .container {
-  background-color: aqua;
-  border: 2px solid black;
 }
 
 .turn {
-  background-color: yellow;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--font-color);
 }
 
 .board {
-  background-color: grey;
   width: 300px;
   height: 300px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px;
 
   box-sizing: border-box;
 }
@@ -20,5 +79,18 @@
 .cellBtn {
   width: 100px;
   height: 100px;
-  color: yellow;
+  border: 2px var(--border-color) solid;
+  background-color: var(--cell-color);
+  color: var(--font-color);
+  font-weight: bold;
+  font-size: 30px;
+}
+.cellBtn:hover {
+  background-color: rgb(172, 172, 172);
+  transform: scale(0.97, 0.97);
+}
+
+.resetBtn {
+  width: 150px;
+  height: 40px;
 }
