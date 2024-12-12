@@ -143,12 +143,12 @@ body {
 }
 
 .resetBtn:hover {
-  background-color: rgba(131, 131, 131, 0.055);
+  background-color: var(--base-color);
   transform: scale(0.97, 0.97);
 }
 
 .restartBtn:hover {
-  background-color: rgba(131, 131, 131, 0.055);
+  background-color: var(--base-color);
   transform: scale(0.97, 0.97);
 }
 
