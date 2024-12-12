@@ -21,6 +21,17 @@ themeSwitch.addEventListener("click", () => {
   darkmode !== "active" ? enableDarkmode() : disableDarkmode();
 });
 
+const infoBtn = document.querySelector(".info");
+const dialog2 = document.querySelector(".infoDialog");
+const closeBtn = document.querySelector(".close");
+infoBtn.addEventListener("click", () => {
+  dialog2.showModal();
+});
+
+closeBtn.addEventListener("click", () => {
+  dialog2.close();
+});
+
 function cellObj() {
   let value = 0;
 

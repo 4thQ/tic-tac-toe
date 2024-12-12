@@ -15,6 +15,39 @@
   --font-color: rgb(255, 255, 255);
 }
 
+.info {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: var(--cell-color);
+  border: 1px solid var(--border-color);
+  fill: var(--text-color);
+}
+
+.info:hover {
+  background-color: rgba(131, 131, 131, 0.055);
+  transform: scale(0.97, 0.97);
+}
+
+.infoDialog {
+  width: 500px;
+  height: 190px;
+  background-color: var(--cell-color);
+  color: var(--font-color);
+}
+
+.close {
+  position: fixed;
+  right: 705px;
+  top: 360px;
+  border: none;
+}
+
+.close:hover {
+  background-color: rgb(228, 38, 38);
+  transform: scale(0.97, 0.97);
+}
+
 .theme-switch {
   position: fixed;
   top: 20px;
@@ -95,6 +128,9 @@ body {
 .cellBtn:hover {
   background-color: rgb(172, 172, 172);
   transform: scale(0.97, 0.97);
+  transition: 0.5s ease;
+
+  transform-style: preserve-3d;
 }
 
 .resetBtn {
