@@ -180,6 +180,7 @@ function handleDisplay() {
   const playerTurnDiv = document.querySelector(".turn");
   const boardDiv = document.querySelector(".board");
   const resetbtn = document.querySelector(".resetBtn");
+  const restartBtn = document.querySelector(".restartBtn");
   let gb = game.board;
   playerTurnDiv.innerText = "Make you Move";
 
@@ -241,8 +242,13 @@ function handleDisplay() {
     document.location.reload();
   }
 
+  function clickRestart() {
+    document.location.reload();
+  }
+
   resetbtn.addEventListener("click", clickReset);
   boardDiv.addEventListener("click", clickHandlerBoard);
+  restartBtn.addEventListener("click", clickRestart);
 
   clickHandlerBoard();
 }

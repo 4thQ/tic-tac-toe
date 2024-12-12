@@ -23,6 +23,11 @@
   border: 1px solid var(--border-color);
 }
 
+.theme-switch:hover {
+  background-color: rgba(131, 131, 131, 0.055);
+  transform: scale(0.97, 0.97);
+}
+
 .theme-switch svg:last-child {
   display: none;
 }
@@ -93,6 +98,25 @@ body {
 }
 
 .resetBtn {
+  width: 150px;
+  height: 40px;
+  background-color: var(--cell-color);
+  border: 1.9px solid var(--border-color);
+  color: var(--font-color);
+  font-weight: bolder;
+}
+
+.resetBtn:hover {
+  background-color: rgba(131, 131, 131, 0.055);
+  transform: scale(0.97, 0.97);
+}
+
+.restartBtn:hover {
+  background-color: rgba(131, 131, 131, 0.055);
+  transform: scale(0.97, 0.97);
+}
+
+.restartBtn {
   width: 150px;
   height: 40px;
   background-color: var(--cell-color);
