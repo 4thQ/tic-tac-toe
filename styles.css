@@ -41,11 +41,14 @@
   right: 705px;
   top: 360px;
   border: none;
+  background-color: var(--cell-color);
 }
 
 .close:hover {
-  background-color: rgb(228, 38, 38);
-  transform: scale(0.97, 0.97);
+  border: 2px solid var(--border-color);
+}
+.close svg {
+  fill: var(--border-color);
 }
 
 .theme-switch {
