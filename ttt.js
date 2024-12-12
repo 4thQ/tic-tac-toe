@@ -116,14 +116,14 @@ function gameController() {
     for (const row of gameArray) {
       let check = row.every((i) => i == "X");
       if (check == true) {
-        return "X wins!";
+        return "Player X wins!";
       }
     }
 
     for (const row of gameArray) {
       let check2 = row.every((i) => i == "O");
       if (check2 == true) {
-        return "O wins!";
+        return "Player O wins!";
       }
     }
 
@@ -134,7 +134,7 @@ function gameController() {
       columnWinner = column.every((c) => c == "X");
 
       if (columnWinner == true) {
-        return "X wins!";
+        return "Player X wins!";
       }
     }
 
@@ -144,7 +144,7 @@ function gameController() {
       columnWinner2 = column.every((c) => c == "O");
 
       if (columnWinner2 == true) {
-        return "O wins!";
+        return "Player O wins!";
       }
     }
     //diagonal winner for 2
@@ -156,7 +156,7 @@ function gameController() {
         gameArray[1][1] == "O" &&
         gameArray[2][0] == "O")
     ) {
-      return "O wins!";
+      return "Player O wins!";
     }
 
     if (
@@ -166,7 +166,7 @@ function gameController() {
         gameArray[1][1] == "X" &&
         gameArray[2][0] == "X")
     ) {
-      return "X wins!";
+      return "Player X wins!";
     }
   }
 
@@ -211,13 +211,29 @@ function handleDisplay() {
     playerTurnDiv.innerText =
       "Playerz (" + game.getActivePlayer().value + ") Make your move!";
     playerTurnDiv.innerText = gameC.checkWinner() + "Wins";
+
     if (playerTurnDiv.innerText === "undefinedWins") {
       playerTurnDiv.innerText =
         "Player " + game.getActivePlayer().value + "'s Turn";
     } else {
       playerTurnDiv.innerText = gameC.checkWinner();
       boardDiv.removeEventListener("click", clickHandlerBoard);
+
+      const dialog = document.querySelector("dialog");
+      const showButton = document.querySelector(".showBtn");
+      const closeButton = document.querySelector(".closeBtn");
+      const p = document.querySelector(".p");
+      p.innerText = gameC.checkWinner();
+
+      showButton.addEventListener("click", () => {
+        dialog.showModal();
+      });
+      showButton.click();
+      closeButton.addEventListener("click", () => {
+        dialog.close();
+      });
     }
+
     e.target.disabled = true;
   }
 

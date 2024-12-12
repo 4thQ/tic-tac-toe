@@ -19,6 +19,8 @@
   position: fixed;
   top: 20px;
   right: 20px;
+  background-color: var(--cell-color);
+  border: 1px solid var(--border-color);
 }
 
 .theme-switch svg:last-child {
@@ -93,4 +95,21 @@ body {
 .resetBtn {
   width: 150px;
   height: 40px;
+  background-color: var(--cell-color);
+  border: 1.9px solid var(--border-color);
+  color: var(--font-color);
+  font-weight: bolder;
+}
+
+dialog {
+  text-align: center;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.514);
+  backdrop-filter: blur(10px);
+}
+
+.showBtn {
+  display: none;
 }
