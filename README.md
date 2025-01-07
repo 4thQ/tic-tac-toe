@@ -17,6 +17,7 @@ A simple and fun Tic Tac Toe game built with JavaScript, HTML, and CSS.
    git clone https://github.com/your-username/tictactoe.git
    cd tictactoe
 2. Open index.html in your web browser.
+   
 or
 
 Visit the live demo: [https://your-username.github.io/tictactoe](https://github.com/4thQ/tic-tac-toe.git)
