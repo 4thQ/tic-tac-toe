@@ -20,7 +20,7 @@ A simple and fun Tic Tac Toe game built with JavaScript, HTML, and CSS.
    
 or
 
-Visit the live demo: https://github.com/4thQ/tic-tac-toe.git
+Visit the live demo:[ https://github.com/4thQ/tic-tac-toe.git](https://4thq.github.io/tic-tac-toe/)
 
 
 
