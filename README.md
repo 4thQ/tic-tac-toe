@@ -1,5 +1,5 @@
-# Tic Tac Toe
-Tic-Tac-Toe, Bunny got shot by UFO!
+
+# Tic-Tac-Toe, Bunny got shot by UFO!
 A simple and fun Tic Tac Toe game built with JavaScript, HTML, and CSS. 
 
 ## Features
